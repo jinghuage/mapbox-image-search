@@ -19,20 +19,20 @@ h1 {
   line-height: 20px;
 }
 
-/*a {
+a {
   color: #404040;
   text-decoration: none;
 }
 
 a:hover {
   color: #101010;
-}*/
+}
 
-a {
+.navsimple a {
   color: #ecf0f1;
   text-decoration: none;
 }
-a:hover {
+.navsimple a:hover {
   color: #1abc9c;
 }
 
@@ -149,7 +149,13 @@ h3 {
 .smalllink {
   font:bold 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   padding: 10px;
+  color: #888;
 }
+
+.smalllink:hover {
+  color: #333;
+}
+
 .map-overlay {
     font:bold 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     position: absolute;

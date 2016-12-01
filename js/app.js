@@ -40,18 +40,12 @@ var selectedPlaces = {
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -90.77630,
-          30.00407
-        ]
+        "coordinates": [0, 0]
       },
       "properties": {
-        "phoneFormatted": "(225) 265-2151",
-        "name": "Oak Alley Plantation",
-        "address": "3645 LA-18, Vacherie, LA 70090",
-        "state": "Louisiana",
-        "country": "United States",
-        "postalCode": "70090"
+        "name": "name",
+        "address": "address",
+        "phoneFormatted": "(xxx)xxx-xxxx"
       }
     }]
 };
@@ -90,11 +84,21 @@ map.on('load', function(e) {
           'circle-opacity': 0.5
       }
   });
+
+  $.getJSON("selectedPlaces.geojson", function(data) {
+
+      selectedPlaces = data;
+      //console.log(data);
+
+      // Initialize the list
+      buildLocationList(selectedPlaces);
+      map.getSource('places').setData(selectedPlaces);
+  });
 });
 
 
 $("#showMarkers").click(function(e) {
-   map.getSource('places').setData(selectedPlaces);
+   //map.getSource('places').setData(selectedPlaces);
 
    var layerid = 'locations';
    var visibility = map.getLayoutProperty(layerid, 'visibility');
@@ -114,15 +118,6 @@ $("#hideMarkers").click(function(e) {
     }
 });
 
-
-$.getJSON("selectedPlaces.geojson", function(data) {
-
-    selectedPlaces = data;
-    //console.log(data);
-
-    // Initialize the list
-    buildLocationList(selectedPlaces);
-});
 
 map.on('mousemove', function (e) {
   // var coords = e.lngLat;
@@ -148,11 +143,12 @@ $("#save").click(function(e){
        },
        "properties": {
          "ID": savedId,
-         "Tag": placetag
+         "name": placetag
        }
    };
    savedId++;
 
+   if(coords == {}) return;
    feature.geometry.coordinates = [coords.lng, coords.lat];
    savedgeojson.features.push(feature);
 
@@ -166,15 +162,35 @@ $("#save").click(function(e){
    var link = listing.appendChild(document.createElement('a'));
    link.href = '#';
    link.className = 'title';
-   link.dataPosition = savedId;
+   link.dataPosition = savedId-1;
    link.innerHTML = "Saved Place " + feature.properties.ID + ": " + placetag;
+   link.onclick = function(e){
+     //console.log('click to flyto saved location');
+     var dataPosition = $(this)[0].dataPosition;
+     var feature=savedgeojson.features[dataPosition];
+     map.flyTo({
+         center: feature.geometry.coordinates
+     });
+   }
 
    var add = listing.appendChild(document.createElement('a'));
    add.href = 'javascript:void(0)';
    add.className = 'smalllink';
+   add.dataPosition = savedId-1;
    add.innerHTML = "add to selection";
    add.onclick = function(e){
-     console.log('click to add to selection');
+     //console.log('click to add to selection');
+     var dataPosition = $(this)[0].dataPosition;
+     var feature=savedgeojson.features[dataPosition];
+
+     // Select the listing container in the HTML
+     var listings = document.getElementById('listings');
+     var insertPosition = selectedPlaces.features.length;
+     //console.log('insertPosition:', insertPosition);
+     addListing(listings, feature, insertPosition);
+
+     selectedPlaces.features.push(feature);
+     map.getSource('places').setData(selectedPlaces);
    };
 
    var str = JSON.stringify(savedgeojson);
@@ -207,7 +223,7 @@ map.on('click', function(e){
   //map.setPaintProperty('point', 'circle-color', '#3bb2d0');
   map.setPaintProperty('point', 'circle-radius', pixels);
 
-  //Website.Homepage.searchPhotos('', 1, coords.lat, coords.lng, 1);
+  Website.Homepage.searchPhotos('', 1, coords.lat, coords.lng, 1);
 });
 
 
@@ -224,36 +240,65 @@ slider.addEventListener('input', function(e) {
 
 
 function buildLocationList(data) {
-  // Iterate through the list of stores
-  for (i = 0; i < data.features.length; i++) {
-    var currentFeature = data.features[i];
+
+    // Select the listing container in the HTML
+    var listings = document.getElementById('listings');
+
+
+    // Iterate through the list of data
+    for (i = 0; i < data.features.length; i++) {
+        var currentFeature = data.features[i];
+        addListing(listings, currentFeature, i);
+    };
+
+}
+
+
+function addListing(listings, currentFeature, insertPosition) {
+
+
     // Shorten data.feature.properties to just `prop` so we're not
     // writing this long form over and over again.
     var prop = currentFeature.properties;
-    // Select the listing container in the HTML and append a div
+    // inside the listing contatiner, append a div
     // with the class 'item' for each store
-    var listings = document.getElementById('listings');
+
     var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
-    listing.id = 'listing-' + i;
+    listing.id = 'listing-' + insertPosition;
 
     // Create a new link with the class 'title' for each store
     // and fill it with the store address
     var link = listing.appendChild(document.createElement('a'));
     link.href = '#';
     link.className = 'title';
-    link.dataPosition = i;
+    link.dataPosition = insertPosition;
     link.innerHTML = prop.name;
-    link.onclick = function(e){
-      console.log('click to fly to selection');
+    link.onclick = function(e) {
+        //console.log('click to fly to selection');
+        //console.log($(this)[0].dataPosition);
+        var dataPosition = $(this)[0].dataPosition;
+        var feature = selectedPlaces.features[dataPosition];
+        //console.log(feature.geometry.coordinates);
+        map.flyTo({
+            center: feature.geometry.coordinates
+        });
     };
 
-    // Create a new div with the class 'details' for each store
-    // and fill it with the city and phone number
-    var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.address;
-    if (prop.phoneFormatted) {
-      details.innerHTML += ' &middot; ' + prop.phoneFormatted;
-    }
-  }
+
+        // Create a new div with the class 'details' for each store
+        // and fill it with the city and phone number
+        var details = listing.appendChild(document.createElement('div'));
+
+        if (prop.address) {
+          details.innerHTML = prop.address;
+        }
+        else {
+          var lonlat = currentFeature.geometry.coordinates;
+          details.innerHTML = 'lonlat: '+lonlat;
+        }
+        if (prop.phoneFormatted) {
+            details.innerHTML += ' &middot; ' + prop.phoneFormatted;
+        }
+
 }

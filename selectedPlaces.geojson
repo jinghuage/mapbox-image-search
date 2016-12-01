@@ -1,0 +1,42 @@
+      {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -90.77630,
+                30.00407
+              ]
+            },
+            "properties": {
+              "phoneFormatted": "(225) 265-2151",
+              "name": "Oak Alley Plantation",
+              "address": "3645 LA-18, Vacherie, LA 70090",
+              "state": "Louisiana",
+              "country": "United States",
+              "postalCode": "70090"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -91.37093201887015,
+                30.79594470384353
+              ]
+            },
+            "properties": {
+              "phoneFormatted": "(225) 635-3332",
+              "name":"Rosedown Plantation",
+              "address": "12501 LA-10, Saint Francisville, Louisiana 70775",
+              "city": "Saint Francisville",
+              "state":"Louisiana",
+              "country": "United States",
+              "postalCode": "70775"
+            }
+          }
+        ]
+      }

@@ -1,0 +1,118 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+
+<link rel="stylesheet" href="css/app.css" />
+<link rel="stylesheet" href="css/normalize.css" />
+<link rel="stylesheet" href="css/helpers.css" />
+<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="css/gallery.css" />
+<link rel="stylesheet" href="css/thumbnails.css" />
+<link rel="stylesheet" href="css/homepage.css" />
+<link rel="stylesheet" href="css/login.css" />
+
+<style>
+</style>
+
+<div class="apptitle">
+  <div class="topic">
+  <h1>Images We Share</h1>
+  </div>
+  <div class="navsimple">
+    <h3>
+    <a href="#" id="loginform">Login/Signup</a>
+    <a href="#">Logout</a>
+    </h3>
+  <div class="login">
+    <div class="arrow-up"></div>
+    <div class="formholder">
+      <div class="randompad">
+         <fieldset>
+           <label>Email</label>
+           <input type="email" name="email" value="example@example.com" />
+           <label>Password</label>
+           <input type="password" name="password" />
+           <input type="submit" value="Login" />
+         </fieldset>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+
+<div class='sidebar'>
+  <div class='heading'>
+    <h1>Selected locations</h1>
+  </div>
+  <div class="ctrl">
+    <button id="showMarkers">Show Markers</button>
+    <button id="hideMarkers">Hide Markers</button>
+  </div>
+  <div id='listings' class='listings'></div>
+
+  <div class='heading'>
+    <h1>Current locations</h1>
+  </div>
+  <div class="ctrl">
+    <button id="clear">Clear</button>
+    <button id="save">Save As:</button>
+    <input type="text" id="placetag" placeholder="place tag" class="tag">
+  </div>
+
+  <div class="ctrl">
+    <a href="" id="downloadjson" class="smalllink" style='display:none' download="example.json">Download as JSON</a>
+  </div>
+
+  <div id='yourlistings' class='listings'></div>
+
+</div>
+
+<div class='mainpage'>
+  <div id='map' class='map'></div>
+  <!-- <pre id='coordinates' class='coordinates'></pre> -->
+  <!-- <pre id='info'></pre> -->
+  <div class='map-overlay top'>
+    <div class='map-overlay-inner'>
+        <label>Radius: <span id='slider-value'>5km</span></label>
+        <input id='slider' type='range' min='0' max='100' step='0' value='10' />
+    </div>
+  </div>
+
+  <header class="island">
+     <h1>Flickr gallery</h1>
+     <!-- <form class="js-form-search form-search" action="/search" method="get" role="search">
+        <label for="query">Search:</label>
+        <input type="search" name="query" id="query" placeholder="Search" required />
+        <input type="submit" value="Search" />
+     </form> -->
+  </header>
+
+  <div class="island">
+     <div class="js-gallery gallery">
+        <img src="" class="js-gallery__image" />
+        <button class="js-gallery__arrow--left gallery__arrow gallery__arrow--left">
+           <span class="visually-hidden">Previous photo</span>
+        </button>
+        <button class="js-gallery__arrow--right gallery__arrow gallery__arrow--right">
+           <span class="visually-hidden">Next photo</span>
+        </button>
+     </div>
+  </div>
+
+  <div class="island thumbnails">
+     <ul class="js-thumbnails__list thumbnails__list"></ul>
+     <ol class="js-thumbnails__pager thumbnails__pager"></ol>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/utility.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/flickr.js"></script>
+<script src="js/main.js"></script>
+<script src="js/login.js"></script>

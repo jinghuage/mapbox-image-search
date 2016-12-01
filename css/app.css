@@ -1,0 +1,249 @@
+body {
+  color: #404040;
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/*a {
+  color: #404040;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #101010;
+}*/
+
+a {
+  color: #ecf0f1;
+  text-decoration: none;
+}
+a:hover {
+  color: #1abc9c;
+}
+
+.apptitle {
+  background: #34495e;
+  font:bold 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100px;
+  padding-left: 20px;
+  /*border-bottom: 1px solid rgba(0,0,0,0.1);*/
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.topic {
+  font-size: 28px;
+  display: inline-block;
+  color: #ffffff;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+.navsimple {
+  display: inline-block;
+  position:absolute;
+  right:20;
+  font-size: 16px;
+  font-weight: bold;
+  width: 350px;
+  /*background-color: #aaa;*/
+}
+
+h3 {
+  padding: 20px;
+  color: #ecf0f1;
+  /*background-color: #aaa;*/
+}
+.navsimple a {
+  padding: 20px;
+}
+
+.sidebar {
+  position: absolute;
+  width: 33.3333%;
+  height: 100%;
+  top: 120;
+  left: 0;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 0;
+}
+
+.pad2 {
+  padding: 20px;
+}
+
+.mainpage {
+  position: absolute;
+  left: 33.3333%;
+  width: 66.6666%;
+  top: 120;
+  bottom: 0;
+}
+
+.map {
+  height: 500px;
+  /*position:absolute; top:0; bottom:0; width:100%;*/
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.coordinates {
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding:5px 10px;
+    margin: 0;
+    /*font-size: 11px;*/
+    font:bold 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
+}
+
+#info {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+}
+.ctrl {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.tag {
+  height: 30px;
+}
+.smalllink {
+  font:bold 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding: 10px;
+}
+.map-overlay {
+    font:bold 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    position: absolute;
+    width: 25%;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.map-overlay .map-overlay-inner {
+    /*background-color: #fff;*/
+    background: rgba(0,0,0,0.4);
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 0px;
+}
+
+.map-overlay label {
+    display: block;
+    margin: 0px;
+    color: #fff;
+}
+
+.map-overlay input {
+    background-color: transparent;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    cursor: ew-resize;
+}
+
+.heading {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  height: 60px;
+  line-height: 60px;
+  padding: 10px;
+}
+
+.listings {
+  height: 40%;
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+.listings .item {
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listings .item:last-child { border-bottom: none; }
+
+.listings .item .title {
+  display: block;
+  color: #00853e;
+  font-weight: 700;
+}
+
+.listings .item .title small { font-weight: 400; }
+
+.listings .item.active .title,
+.listings .item .title:hover { color: #8cc63f; }
+
+.listings .item.active {
+  background-color: #f8f8f8;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00853e;
+  border-radius: 0;
+}
+
+.clearfix { display: block; }
+
+.clearfix::after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
